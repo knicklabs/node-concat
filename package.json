@@ -1,0 +1,15 @@
+{
+  "author": "Nickolas Kenyeres <nkenyeres@gmail.com> (http://knicklabs.github.com)",
+  "name": "concat",
+  "description": "A command line utility that concatenates files specified in a mannifest",
+  "version": "0.0.0",
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "bin": {
+    "concat": "bin/concat.bin.js"
+  }
+}
