@@ -29,19 +29,23 @@ var concat = function(options) {
   this.manifest = options.manifest || 'manifest.txt';
   this.destination = options.destination || 'output.js';
   this.fs = require('fs');
+  this.fshistory = [];
 
   this.pathFromCurrentDir = function(path) {
     return this.fs.realpathSync(path);
   };
 
   this.appendFiletoFile = function(src, dst) {
-    var that = this;
-
-    this.fs.readFile(src, 'utf-8', function(err, data) {
-      if (err) throw err;
-
-      that.fs.createWriteStream(dst, {flags: 'a'}).end('/* '+src+' */\n'+data+'\n\n');
-    });
+    if (src.charAt(0) != '.' && this.inHistory(src) !== true) {
+      var that = this;
+      that.addToHistory(src);
+      
+      this.fs.readFile(src, 'utf-8', function(err, data) {
+        if (err) throw err;
+      
+        that.fs.createWriteStream(dst, {flags: 'a'}).end('/* '+src+' */\n'+data+'\n\n');
+      });
+    }
   };
 
   this.appendDirToFile = function(src, dst) {
@@ -85,10 +89,23 @@ var concat = function(options) {
         if (s.isDirectory()) {
           that.appendDirToFile(f, that.destination);
         } else {
-          that.appendFileToFile(f, that.destination);
+          that.appendFiletoFile(f, that.destination);
         }
       }
     });
+  };
+  
+  this.addToHistory = function(src) {
+    this.fshistory.push(src);
+  };
+  
+  this.inHistory = function(src) {
+    for (var i = 0; i < this.fshistory.length; i++) {
+      if (src == this.fshistory[i]) {
+        return true;
+      }
+    }
+    return false;
   };
 };
 
