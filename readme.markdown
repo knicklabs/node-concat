@@ -6,18 +6,19 @@ NodeConcat is released under the MIT license.
 
 ### Instructions
 
+#### Install NodeConcat
+
+You can install NodeConcat with NPM. It should be installed globally.
+
+`
+npm install concat -g
+`
+
 #### Create a manifest file
 
-Your manifest file should include the names of files you want to concatenate. You can include directories and the contents of the directory will be recursively included into the list of files to conctenate. Hidden files and duplicate files will be ignored.
+Your manifest file should include the names of files you want to concatenate. You can include directories and the contents of the directory will be recursively included into the list of files to conctenate. Hidden files and duplicate files will be ignored. List one file or directory per line.
 
-`
-lib/plugins
-app-models.js
-app-controllers.js
-app-views.js
-`
-
-### Run the utility
+#### Run the utility
 
 Run NodeConcat by passing in the name of the manifest and the name of the destination file. 
 
