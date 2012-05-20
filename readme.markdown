@@ -10,20 +10,20 @@ NodeConcat is released under the MIT license.
 
 Your manifest file should include the names of files you want to concatenate. You can include directories and the contents of the directory will be recursively included into the list of files to conctenate. Hidden files and duplicate files will be ignored.
 
-``` text manifest.txt
+`
 lib/plugins
 app-models.js
 app-controllers.js
 app-views.js
-```
+`
 
 ### Run the utility
 
 Run NodeConcat by passing in the name of the manifest and the name of the destination file. 
 
-``` bash
+`
 concat manifest.txt app.js
-```
+`
 
 ### License
 
