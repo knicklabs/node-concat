@@ -31,7 +31,7 @@ var concat = function(options) {
   this.fs = require('fs');
 
   this.pathFromCurrentDir = function(path) {
-    return __dirname + '/' + path;
+    return this.fs.realpathSync(path);
   };
 
   this.appendFiletoFile = function(src, dst) {
