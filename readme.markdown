@@ -16,7 +16,7 @@ $ npm install concat -g
 
 #### Create a Manifest File
 
-Create a manifest file inside your project directory. The manifest file should include a a list of all the files you want to concatenate. You can include directories in the list. The contents of the directory will be recursively included into the list of files to concatenate. Hidden files and duplicates will be omitted.
+Create a manifest file inside your project directory. The manifest file should include a list of all the files you want to concatenate. You can include directories in the list. The contents of the directory will be recursively included into the list of files to concatenate. Hidden files and duplicates will be omitted.
 
 You should list one file or directory per line in the manifest file. An example is below.
 
