@@ -1,30 +1,40 @@
-### Introduction
+### Introducing NodeConcat
 
-NodeConcat is a command line utility that concatentates files listed in a manifest. It is useful as a simple build tool for CSS, JavaScript, and other text files. It does not do minification or compression. You will need another tool for that. 
+NodeConcat is a command line utility that concatenates text files listed in a manifest. It is useful as a simple build tool for CSS, JavaScript, and other text files. It does not do beautification, minification, obfuscation, or compression. You will need other tools for those tasks. 
 
 NodeConcat is released under the MIT license.
 
-### Instructions
+### Getting Started
 
-#### Install NodeConcat
+#### Install NodeConcat with NPM
 
-You can install NodeConcat with NPM. It should be installed globally.
+NodeConcat should be installed globally so that you can run it from the command line from any directory.
 
-`
-npm install concat -g
-`
+```
+$ npm install concat -g
+```
 
-#### Create a manifest file
+#### Create a Manifest File
 
-Your manifest file should include the names of files you want to concatenate. You can include directories and the contents of the directory will be recursively included into the list of files to conctenate. Hidden files and duplicate files will be ignored. List one file or directory per line.
+Create a manifest file inside your project directory. The manifest file should include a a list of all the files you want to concatenate. You can include directories in the list. The contents of the directory will be recursively included into the list of files to concatenate. Hidden files and duplicates will be omitted.
 
-#### Run the utility
+You should list one file or directory per line in the manifest file. An example is below.
 
-Run NodeConcat by passing in the name of the manifest and the name of the destination file. 
+```
+lib
+src/helpers.js
+src
+```
 
-`
-concat manifest.txt app.js
-`
+In the above example, the entire contents of lib are concatenated into the output file. Then the contents of the src/helpers.js is concatenated into the output file. Finally the entire contents of src are concatenated, but src/helpers.js is excluded this time because it was previously included.
+
+#### Run NodeConcat
+
+Run NodeConcat but passing two arguments: (1) the name of the manifest and (2) the name of the output file.
+
+```
+$ concat manifest.txt app.js
+```
 
 ### License
 
