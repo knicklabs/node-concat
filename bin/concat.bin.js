@@ -5,7 +5,8 @@ var Concat = require('../concat.js');
 var options = {
   encoding: 'utf-8',
   manifestFile: 'manifest.txt',
-  destinationFile: 'output.js'
+  destinationFile: 'output.js',
+  sync: false
 };
 
 var args = process.argv.slice(2);
@@ -25,9 +26,18 @@ for (var i = 0; i < args.length; i++) {
       case "--utf-8":
         options.encoding = 'utf-8';
         break;
+      case "--sync":
+        options.sync = true;
+        break;
     }
   }
 }
 
 var concat = new Concat(options);
-concat.process();
+
+if (options.sync === true) {
+  console.log('Used synchronous file processing.');
+  return concat.processSync();
+} else {
+  return concat.process();
+}

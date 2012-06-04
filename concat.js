@@ -35,7 +35,7 @@ var concat = function(options) {
     return this.fs.realpathSync(path);
   };
 
-  this.appendFiletoFile = function(src, dst) {
+  this.appendFileToFile = function(src, dst) {
     if (src.charAt(0) != '.' && this.inHistory(src) !== true) {
       var that = this;
       that.addToHistory(src);
@@ -45,6 +45,16 @@ var concat = function(options) {
       
         that.fs.createWriteStream(dst, {flags: 'a'}).end('/* '+src+' */\n'+data+'\n\n');
       });
+    }
+  };
+  
+  this.appendFileToFileSync = function(src, dst) {
+    if (src.charAt(0) != '.' && this.inHistory(src) !== true) {
+      this.addToHistory(src);
+      
+      var data = this.fs.readFileSync(src, 'utf-8');
+      
+      this.fs.createWriteStream(dst, { flags: 'a'}).end('/* '+src+' */\n'+data+'\n\n');
     }
   };
 
@@ -63,11 +73,29 @@ var concat = function(options) {
           if (s.isDirectory()) {
             that.appendDirToFile(f, dst);
           } else {
-            that.appendFiletoFile(f, dst);
+            that.appendFileToFile(f, dst);
           }
         }
       }
     }); 
+  };
+  
+  this.appendDirToFileSync = function(src, dst) {
+    var files = this.readdirSync(src);
+    
+    for (var i = 0; i < files.length; i++) {
+      n = files[i];
+      f = src + '/' + n;
+      s = this.fs.lstatSync(f);
+      
+      if (n.charAt(0) != '.') {
+        if (s.isDirectory()) {
+          this.appendDirToFileSync(f, dst);
+        } else {
+          this.appendFileToFileSync(f, dst);
+        }
+      }
+    }
   };
 
   this.process = function() {
@@ -89,10 +117,33 @@ var concat = function(options) {
         if (s.isDirectory()) {
           that.appendDirToFile(f, that.destination);
         } else {
-          that.appendFiletoFile(f, that.destination);
+          that.appendFileToFile(f, that.destination);
         }
       }
     });
+  };
+  
+  this.processSync = function() {
+    var that = this;
+    
+    this.fs.createWriteStream(this.destination, {flags: 'w'});
+    
+    var data = this.fs.readFileSync(this.manifest, 'utf-8');
+    var files = data.split('\n').map(function(f) {
+      f = that.pathFromCurrentDir(f);
+      return f;
+    });
+    
+    for (var i = 0; i < files.length; i++) {
+      f = files[i];
+      s = that.fs.lstatSync(f);
+      
+      if (s.isDirectory()) {
+        that.appendDirToFileSync(f, that.destination);
+      } else {
+        that.appendFileToFileSync(f, that.destination);
+      }
+    }
   };
   
   this.addToHistory = function(src) {

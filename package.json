@@ -2,7 +2,7 @@
   "author": "Nickolas Kenyeres <nkenyeres@gmail.com> (http://knicklabs.github.com)",
   "name": "concat",
   "description": "A command line utility that concatenates files specified in a manifest",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/knicklabs/NodeConcat.git"
