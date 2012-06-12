@@ -30,6 +30,10 @@ var concat = function(options) {
   this.destination = options.destination || 'output.js';
   this.fs = require('fs');
   this.fshistory = [];
+  
+  this.platform = require('os').platform();
+  this.slash = (this.platform == 'win32') ? '\\' : '/';
+  this.nl = (this.platform == 'win32') ? '\r\n' : '\n';
 
   this.pathFromCurrentDir = function(path) {
     return this.fs.realpathSync(path);
@@ -53,8 +57,10 @@ var concat = function(options) {
       this.addToHistory(src);
       
       var data = this.fs.readFileSync(src, 'utf-8');
-      
-      this.fs.createWriteStream(dst, { flags: 'a'}).end('/* '+src+' */\n'+data+'\n\n');
+	  
+	  var file = this.fs.openSync(dst, 'a');
+	  this.fs.writeSync(file, '/* '+src+' */\n'+data+'\n\n', file.length, 'utf-8');
+	  this.fs.close(file);
     }
   };
 
@@ -66,7 +72,7 @@ var concat = function(options) {
 
       for (var i = 0; i < files.length; i++) {
         n = files[i];
-        f = src + '/' + n;
+        f = src + that.slash + n;
         s = that.fs.lstatSync(f);
 
         if (n.charAt(0) != '.') {
@@ -81,11 +87,11 @@ var concat = function(options) {
   };
   
   this.appendDirToFileSync = function(src, dst) {
-    var files = this.readdirSync(src);
+    var files = this.fs.readdirSync(src);
     
     for (var i = 0; i < files.length; i++) {
       n = files[i];
-      f = src + '/' + n;
+      f = src + this.slash + n;
       s = this.fs.lstatSync(f);
       
       if (n.charAt(0) != '.') {
@@ -105,7 +111,7 @@ var concat = function(options) {
     this.fs.readFile(this.manifest, 'utf-8', function(err, data) {
       if (err) throw err;
 
-      var files = data.split('\n').map(function(f) {
+      var files = data.split(that.nl).map(function(f) {
         f = that.pathFromCurrentDir(f);
         return f;
       });
@@ -126,10 +132,10 @@ var concat = function(options) {
   this.processSync = function() {
     var that = this;
     
-    this.fs.createWriteStream(this.destination, {flags: 'w'});
+    this.fs.writeFileSync(this.destination, '', 'utf-8');
     
     var data = this.fs.readFileSync(this.manifest, 'utf-8');
-    var files = data.split('\n').map(function(f) {
+    var files = data.split(that.nl).map(function(f) {
       f = that.pathFromCurrentDir(f);
       return f;
     });
