@@ -2,6 +2,8 @@
 
 NodeConcat is a command line utility that concatenates text files listed in a manifest. It is useful as a simple build tool for CSS, JavaScript, and other text files. It does not do beautification, minification, obfuscation, or compression. You will need other tools for those tasks. 
 
+NodeConcat should work on Mac OS X, Gnu/Linux, and Windows systems capable of running Node.js. Thanks to (ricklws)[https://github.com/ricklws] for the Windows support.
+
 NodeConcat is released under the MIT license.
 
 ### Getting Started
