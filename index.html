@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>node-concat by knicklabs</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">node-concat</h1>
+        <p class="header">A CLI to concatenate files</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/knicklabs/node-concat/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/knicklabs/node-concat/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/knicklabs/node-concat">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/knicklabs">knicklabs</a></p>
+
+
+      </header>
+      <section>
+        <h3>Introducing Node Concat</h3>
+
+<p>Node Concat is a command line utility that concatenates text files listed in a manifest. It is useful as a simple build tool for CSS, JavaScript, and other text files. It does not do beautification, minification, obfuscation, or compression. You will need other tools for those tasks. </p>
+
+<p>Node Concat is released under the MIT license.</p>
+
+<h3>Getting Started</h3>
+
+<h4>Install Node Concat with NPM</h4>
+
+<p>Node Concat should be installed globally so that you can run it from the command line from any directory.</p>
+
+<pre><code>$ npm install concat -g
+</code></pre>
+
+<h4>Create a Manifest File</h4>
+
+<p>Create a manifest file inside your project directory. The manifest file should include a list of all the files you want to concatenate. You can include directories in the list. The contents of the directory will be recursively included into the list of files to concatenate. Hidden files and duplicates will be omitted.</p>
+
+<p>You should list one file or directory per line in the manifest file. An example is below.</p>
+
+<pre><code>lib
+src/helpers.js
+src
+</code></pre>
+
+<p>In the above example, the entire contents of lib are concatenated into the output file. Then the contents of the src/helpers.js is concatenated into the output file. Finally the entire contents of src are concatenated, but src/helpers.js is excluded this time because it was previously included.</p>
+
+<h4>Run NodeConcat</h4>
+
+<p>Run Node Concat by passing two arguments: (1) the name of the manifest and (2) the name of the output file.</p>
+
+<pre><code>$ concat manifest.txt app.js
+</code></pre>
+
+<h3>License</h3>
+
+<p>Copyright (c) 2012 Nickolas Kenyeres</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-33637708-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
