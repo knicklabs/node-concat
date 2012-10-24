@@ -13,6 +13,7 @@
   "engines": {
     "node": "*"
   },
+  "main": "concat",
   "bin": {
     "concat": "bin/concat.bin.js"
   }
