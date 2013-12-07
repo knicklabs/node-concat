@@ -1,3 +1,7 @@
+# Warning
+
+This project is no longer maintained. For more than a year I have had no use for using this tool. If you are just looking at this project now, I would recommend looking elsewhere. I would suggest the much more robust and powerful [grunt-contrib-concat](https://github.com/gruntjs/grunt-contrib-concat) for Grunt.
+
 ### Introducing NodeConcat
 
 NodeConcat is a command line utility that concatenates text files listed in a manifest. It is useful as a simple build tool for CSS, JavaScript, and other text files. It does not do beautification, minification, obfuscation, or compression. You will need other tools for those tasks. 
